@@ -5,12 +5,8 @@
 from easydict import EasyDict as edict
 from collections import OrderedDict as odict
 import sys
-is_py3 = (sys.version_info > (3, 0))
-try:
-    from thread import get_ident as _get_ident
-except ImportError:
-    if is_py3: from _dummy_thread import get_ident as _get_ident
-    else     : from dummy_thread  import get_ident as _get_ident
+
+import threading
 
 
 # In python 2, all of your classes should inherit from object.
@@ -83,7 +79,8 @@ class Ordered_EasyDict(object):
     def __repr__(self, _repr_running={}): # [Adapted from]  https://github.com/python/cpython/blob/2.7/Lib/collections.py
         'oedict.__repr__() <==> repr(oedict)'
         # return '@oedict@'
-        call_key = id(self), _get_ident()
+        call_key = (id(self), threading.get_ident())
+
         if call_key in _repr_running:
             return '...'
         _repr_running[call_key] = 1
