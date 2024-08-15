@@ -18,7 +18,7 @@ from easydict import EasyDict as edict
 from ordered_easydict import Ordered_EasyDict as oedict
 from pprint import pprint
 
-from tensorboardX import SummaryWriter
+from tensorboard import SummaryWriter
 from tqdm import tqdm
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
